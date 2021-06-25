@@ -1,0 +1,81 @@
+uuid: 6531ef71-768f-413b-9830-0bc39bd330f6
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - islandora_spreadsheet_ingest
+_core:
+  default_config_hash: EhiC4tKL2gyeKv_zy7F5Dl5vgiX9Cglc2Yx7uSQ6Qb0
+id: isi_media_doc
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: isi
+label: 'Create document media from rows in the csv.'
+source:
+  columns:
+    - ID
+    - Title
+    - Model
+    - Digital_File
+process:
+  _file_exists:
+    -
+      plugin: get
+      source: Digital_File
+    -
+      plugin: skip_on_empty
+      method: row
+      message: 'Field Digital_File is missing'
+  bundle:
+    -
+      plugin: get
+      source: Model
+    -
+      plugin: static_map
+      bypass: false
+      map:
+        'Digital Document': document
+  name: Title
+  field_media_document:
+    -
+      plugin: get
+      source: ID
+    -
+      plugin: migration_lookup
+      migration: isi_file
+      no_stub: true
+    -
+      plugin: dgi_migrate.load_entity
+      entity_type: 'entity:file'
+  field_media_use:
+    -
+      plugin: default_value
+      default_value: 'http://pcdm.org/use#OriginalFile'
+    -
+      plugin: entity_lookup
+      bundle_key: vid
+      bundle: islandora_media_use
+      value_key: field_external_uri
+      entity_type: taxonomy_term
+      ignore_case: true
+  field_media_of:
+    -
+      plugin: get
+      source: ID
+    -
+      plugin: migration_lookup
+      migration: isi_node
+      no_stub: true
+    -
+      plugin: dgi_migrate.load_entity
+      entity_type: 'entity:node'
+destination:
+  plugin: 'entity:media'
+  default_bundle: document
+migration_dependencies:
+  required:
+    - isi_file
+    - isi_node

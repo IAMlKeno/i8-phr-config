@@ -1,0 +1,11 @@
+palette:
+  base-color: '#000080'
+  secondary-color: '#000080'
+  tertiary-color: '#000080'
+  gradient-color-start: '#2F3234'
+  gradient-color-end: '#000080'
+  focus-outline-color: '#FFFFFF'
+logo: 'public://color/dgi_i8_base-dc0b38ad/logo.svg'
+stylesheets: {  }
+files:
+  - 'public://color/dgi_i8_base-dc0b38ad/logo.svg'

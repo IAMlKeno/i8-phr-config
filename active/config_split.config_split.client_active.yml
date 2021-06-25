@@ -1,0 +1,16 @@
+uuid: 295e64cf-173e-4204-846a-fbd76c100125
+langcode: en
+status: true
+dependencies: {  }
+id: client_active
+label: 'Client Active'
+description: 'Client Active config'
+folder: /opt/www/d8_configs/default/splits/client/active
+module: {  }
+theme: {  }
+blacklist: {  }
+graylist:
+  - '*'
+graylist_dependents: true
+graylist_skip_equal: true
+weight: 5

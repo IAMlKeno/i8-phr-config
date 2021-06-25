@@ -1,0 +1,15 @@
+ngcode: en
+status: true
+dependencies: {  }
+id: client_managed
+label: 'Client Managed'
+description: 'Client Active config'
+folder: /opt/www/d8_configs/default/splits/client/managed
+module: {  }
+theme: {  }
+blacklist: {  }
+graylist:
+    - '*'
+graylist_dependents: true
+graylist_skip_equal: true
+weight: 4

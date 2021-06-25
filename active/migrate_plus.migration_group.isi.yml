@@ -1,0 +1,26 @@
+uuid: 749391f1-e5b5-4046-a167-b45fa59b11b6
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - islandora_spreadsheet_ingest
+_core:
+  default_config_hash: uqJX7kHXgXCo73IleM14fPzNfu7f1d7TXUeh8DnBc3I
+id: isi
+label: 'CSV to Islandora Repository Object nodes'
+description: 'Mapping from CSV to I8.'
+source_type: CSV
+module: null
+shared_configuration:
+  source:
+    plugin: spreadsheet
+    worksheet: nada
+    track_changes: true
+    file: modules/contrib/islandora_spreadsheet_ingest/fixtures/migration_example.csv
+    header_row: 1
+    keys:
+      ID:
+        type: integer
+  migration_tags:
+    - isi_template

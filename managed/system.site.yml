@@ -1,0 +1,14 @@
+uuid: 5d4a4b76-5ee5-46ca-8f08-05769347c712
+name: 'Pennsylvania House of Representatives Digital Collections'
+mail: records@pabmc.net
+slogan: 'Find. Protect. Share. '
+page:
+  403: ''
+  404: ''
+  front: /front
+admin_compact_mode: false
+weight_select_max: 100
+langcode: en
+default_langcode: en
+_core:
+  default_config_hash: yXadRE77Va-G6dxhd2kPYapAvbnSvTF6hO4oXiOEynI

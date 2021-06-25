@@ -1,0 +1,92 @@
+uuid: 6f83a0b9-3720-4232-a6d8-cf8f5f655409
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - islandora_spreadsheet_ingest
+_core:
+  default_config_hash: 201NVw5oVo8XqD0c0IGy_N2c-UhqQpiJT22-oHbj1Bo
+id: isi_file
+class: null
+field_plugin_method: null
+cck_plugin_method: null
+migration_tags: null
+migration_group: isi
+label: 'Create files from rows in the csv.'
+source:
+  columns:
+    - ID
+    - Digital_File
+process:
+  _file_defined:
+    -
+      plugin: get
+      source: Digital_File
+    -
+      plugin: skip_on_empty
+      method: row
+      message: 'Field Digital_File is missing'
+  _destination_filename:
+    -
+      plugin: get
+      source: '@_file_defined'
+    -
+      plugin: callback
+      callable: basename
+  _dest_dir:
+    -
+      plugin: default_value
+      default_value: 'repo-bin:/'
+  _date_chunk:
+    -
+      plugin: default_value
+      default_value: Y-m
+    -
+      plugin: callback
+      callable: date
+  _dest_path:
+    -
+      plugin: concat
+      source:
+        - '@_dest_dir'
+        - '@_date_chunk'
+        - '@_destination_filename'
+      delimiter: /
+    -
+      plugin: urlencode
+    -
+      plugin: dgi_migrate.process.log
+      template: 'Destination Full Path: :value'
+      level: 4
+  uri:
+    -
+      plugin: file_copy
+      source:
+        - Digital_File
+        - '@_dest_path'
+      file_exists: rename
+      move: false
+  filemime:
+    -
+      plugin: get
+      source: '@_dest_path'
+    -
+      plugin: callback
+      callable: mime_content_type
+  filename: '@_destination_filename'
+  status:
+    -
+      plugin: default_value
+      default_value: 1
+  filesize:
+    -
+      plugin: get
+      source: '@uri'
+    -
+      plugin: callback
+      callable: filesize
+destination:
+  plugin: 'entity:file'
+  validate: true
+migration_dependencies: null

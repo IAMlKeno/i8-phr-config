@@ -1,0 +1,16 @@
+uuid: dc160978-a0e0-4f78-8e94-488cccf6d294
+langcode: en
+status: true
+dependencies: {  }
+id: client_managed
+label: 'Client Managed'
+description: 'Client Active config'
+folder: /opt/www/d8_configs/default/splits/client/managed
+module: {  }
+theme: {  }
+blacklist: {  }
+graylist:
+  - '*'
+graylist_dependents: true
+graylist_skip_equal: true
+weight: 4
